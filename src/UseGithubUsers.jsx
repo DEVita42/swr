@@ -1,14 +1,7 @@
 import useSWR, { mutate } from 'swr';
 
-const fetcher = (url) => fetch(url).then((res) => {
-  if (!res.ok) {
-    throw new Error(res.status);
-  }
-  return res.json();
-});
-
 function UseGithubUser(username) {
-  const { data, error } = useSWR(username ? `https://api.github.com/users/${username}` : null, fetcher);
+  const { data, error } = useSWR(username ? `https://api.github.com/users/${username}` : null);
 
   const refetch = () => {
     if (username) {
