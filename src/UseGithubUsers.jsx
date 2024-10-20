@@ -7,16 +7,13 @@ const fetcher = (url) => fetch(url).then((res) => {
   return res.json();
 });
 
-function UseGithubUser() {
-  const { data, error } = useSWR((username) => username ? `https://api.github.com/users/${username}` : null, fetcher);
+function UseGithubUser(username) {
+  const { data, error } = useSWR(username ? `https://api.github.com/users/${username}` : null, fetcher);
 
   return {
     data,
     error: error ? error.message : null,
-    loading: !data && !error,
-    fetchGithubUser: (username) => {
-
-    },
+    loading: !data && !error, 
   };
 }
 
